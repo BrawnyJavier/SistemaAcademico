@@ -1,0 +1,87 @@
+﻿<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+<div class="row" ng-controller="AddUserController">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Usuarios </h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-8 b-r">
+                    <h1 class="m-t-none m-b">Registrar Usuario</h1>
+                    <hr />
+                    <form role="form">
+                        <div class="form-group"><label>Nombre</label> <input ng-model="newUser.Name" type="text" placeholder="Nombre" class="form-control"></div>
+                        <div class="form-group"><label>Segundo Nombre</label> <input ng-model="newUser.Name2" type="text" placeholder="Segundo Nombre" class="form-control"></div>
+                        <div class="form-group"><label>Apellido</label> <input ng-model="newUser.LastName" type="text" placeholder="Apellido" class="form-control"></div>
+                        <div class="form-group"><label>N&uacute;mero de T&eacute;lefono</label> <input ng-model="newUser.phoneNum" type="tel" placeholder="Télefono" class="form-control"></div>
+
+                        <div class="form-group"><label>Email</label> <input ng-model="newUser.email" type="email" placeholder="Email" class="form-control"></div>
+                        <div class="form-group"><label>Password</label> <input ng-model="newUser.password" type="password" placeholder="Password" class="form-control"></div>
+                        <div class="col-sm-4" style="padding:0">
+                            <label class="control-label">Tipo de Usuario</label>
+                            <select ng-model="newUser.userType" class="form-control m-b" name="account">
+                                <option value="0">Estudiante</option>
+                                <option value="1">Profesor</option>
+                                <option value="2">Administrador</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="sandbox-container">
+                            <label class="font-noraml">Fecha de Nacimiento</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input ng-model="newUser.birthdate" id="DateBirth" type="text" class="form-control" value="03/04/2014">
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <button ng-click="Registrar()" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Registrar</strong></button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-lg-4">
+
+                    <img class="img-responsive" src="{{shownPic}}" />
+                    
+                    <div class="form-group">
+                        <input accept="image/*" type="file" file-Model="profilePic.data">
+
+                        <a ng-click="PicChange()" ng-if="registered" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block" ><i class="fa fa-info-circle"></i> Añadir foto de perfil </a>
+                    <a ng-if="!registered" style="margin-top:10px" disabled class="btn btn-primary btn-rounded btn-block" href="#"><i class="fa fa-info-circle"></i> Añadir foto de perfil </a>
+                </div>
+            </div>
+     
+        </div>
+    </div>
+
+</div>
+
+
+<script src="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+
+
+    $('#DateBirth').datepicker({});
+
+</script>

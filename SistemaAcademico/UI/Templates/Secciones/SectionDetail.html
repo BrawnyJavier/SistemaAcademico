@@ -1,0 +1,340 @@
+﻿
+<link href="../../../Content/css/plugins/clockpicker/clockpicker.css" rel="stylesheet" />
+<script src="../../../Content/jquery-ui.min.js"></script>
+<script src="../../../Content/js/plugins/clockpicker/clockpicker.js"></script>
+<div class="row" ng-controller="SectionDetailController">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Secci&oacute;n</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <h1 id="head" class="m-t-none m-b">Seccion {{seccion.seccion}} {{seccion.asignatura}} {{seccion.asignaturaName}}</h1>
+                    <hr />
+                    <div class="col-lg-12" style="padding:0">
+                        <form role="form">
+                            <div class="form-group col-lg-6">
+                                <label>Asignatura</label>
+                                <input disabled ng-model="seccion.asignaturaName" type="text" placeholder="Nombre" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>Clave Asignatura</label>
+                                <input disabled ng-model="seccion.asignatura" type="text" placeholder="Segundo Nombre" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>Secci&oacute;n</label>
+                                <input disabled ng-model="seccion.seccion" type="text" placeholder="Segundo Nombre" class="form-control">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Maestro</label>
+                                <select id="teachersSelect" ng-model="newUser.userType" class="form-control m-b" name="account"></select>
+                            </div>
+
+                            <div>
+                                <button ng-click="Registrar()" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Guardar</strong></button>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Creditos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in Asignaturas">
+                                <td>{{r.id}}</td>
+                                <td>{{r.codigo}}</td>
+                                <td>{{r.nombre}}</td>
+                                <td>{{r.tipo}}</td>
+                                <td>{{r.creditos}}</td>
+                                <td style="vertical-align:middle" width="auto">
+                                    <a ng-click="setAsignature(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                        Añadir a Oferta
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Estudiantes</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12"><h1 class="m-t-none m-b">Estudiantes Inscritos</h1></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <button data-toggle="modal" data-target="#myModal5" type="button" class="pull-right btn btn-w-m btn-success"><i class="fa fa-plus"></i>&nbsp;Estudiantes</button>
+                        </div>
+                    </div>
+                    <hr />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Carrera</th>
+                                <th>Foto</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="e in estudiantesInscritos">
+                                <td style="vertical-align:middle">{{e.idEst}}</td>
+                                <td style="vertical-align:middle">{{e.nombreEst}}</td>
+                                <td style="vertical-align:middle">{{e.carreraEst}}</td>
+                                <td><img style="height:auto; max-width:100px" class="img-responsive" src="{{e.fotoEst}}" /></td>
+                                <td style="vertical-align:middle" width="auto">
+                                    <a href="/#/UsersDetails/{{e.idEst}}" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                        Detalles
+                                    </a>
+                                    <a ng-click="BorrarEstudiante(e.idHistorial)" class="btn btn-danger btn-rounded btn-outline btn-block">Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Horarios para la secci&oacute;n</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <div class="col-sm-12 b-r">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12"><h1 class="m-t-none m-b">Horarios</h1></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <button type="button" ng-click="showHorariosBar()" class="pull-right btn btn-w-m btn-success"><i class="fa fa-plus"></i>&nbsp;{{horarioBtn}}</button>
+                            </div>
+                        </div>
+                        <hr />
+                        <div id="addHorario" hidden class="row">
+                            <div class="col-lg-12">
+                                <h2>Añadir Horario</h2>
+                                <div class="col-lg-3">
+                                    <label class="control-label">Seleccionar D&iacute;a <text style="color:red">*</text></label>
+                                    <select id="DaySelect" class="form-control m-b chosen-select" name="account">
+                                        <option value="1">Lunes</option>
+                                        <option value="2">Martes</option>
+                                        <option value="3">Miercoles</option>
+                                        <option value="4">Jueves</option>
+                                        <option value="5">Viernes</option>
+                                        <option value="6">S&aacute;bado</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-label">Seleccionar Aula<text style="color:red">*</text></label>
+                                    <select id="AulaSelect" class="form-control m-b chosen-select" name="account"></select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>Elegir hora de inicio<text style="color:red">*</text></label>
+                                    <div class="input-group clockpicker">
+                                        <input id="FechaInit" type="text" class="form-control" value="18:00">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $('.clockpicker').clockpicker({
+                                            placement: 'top',
+                                            align: 'left',
+                                            donetext: 'Elegir'
+                                        });
+                                    </script>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>Elegir hora de Fin<text style="color:red">*</text></label>
+                                    <div class="input-group clockpicker">
+                                        <input id="FechaFin" type="text" class="form-control" value="18:00">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $('.clockpicker').clockpicker({
+                                            placement: 'top',
+                                            align: 'left',
+                                            donetext: 'Elegir'
+                                        });
+                                    </script>
+                                </div>
+                                <div class="col-lg-12 col-sm-12" style="padding:0">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 pull-right">
+                                        <button type="button" ng-click="AddHorario()" class="pull-right btn btn-w-m btn-primary"><i class="fa fa-floppy-o"></i>&nbsp;Añadir</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <h2>Horario</h2>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>D&iacute;a</th>
+                                    <th>Hora de Inicio</th>
+                                    <th>Hora de Finalizaci&oacute;n</th>
+                                    <th>Aula</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="h in Horarios">
+                                    <td>
+                                        <p ng-if="h.day==1">Lunes</p>
+                                        <p ng-if="h.day==2">Martes</p>
+                                        <p ng-if="h.day==3">Miercoles</p>
+                                        <p ng-if="h.day==4">Jueves</p>
+                                        <p ng-if="h.day==5">Viernes</p>
+                                        <p ng-if="h.day==6">S&aacute;bado</p>
+                                    </td>
+                                    <td>{{h.hourInit | date : 'HH:mm'}}</td>
+                                    <td>{{h.hourUntil | date : 'HH:mm'}}</td>
+                                    <td>{{h.aulaName}}</td>
+
+                                    <td style="vertical-align:middle;" class="pull-right">
+                                        <a class="btn btn-success btn-rounded  btn-outline" href="#">Editar</a>
+                                        <a class="btn btn-danger btn-rounded btn-outline" ng-click="deleteHorario(h.id)">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modals -->
+        <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Buscador de Estudiantes</h4>
+                        <small class="font-bold">Añadir Estudiante a la secci&oacute;n {{seccion.seccion}}  de {{seccion.asignaturaName}}</small>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12 b-r">
+                                <div class="col-lg-12">
+
+                                    <input ng-change="fetch()" ng-model="query" type="text" placeholder="Ingresar Nombre o ID del estudiante..." class="form-control">
+
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Carrera actual</th>
+                                            <th>Fecha de Ingreso</th>
+
+                                            <th>Imagen</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="r in queryResults">
+                                            <td style="vertical-align:middle" width="auto">{{r.id}}</td>
+                                            <td style="vertical-align:middle" width="auto">{{r.nombre}}</td>
+                                            <td style="vertical-align:middle" width="auto">{{r.apellido}}</td>
+                                            <td style="vertical-align:middle" width="auto">{{r.carrera.titulo}}</td>
+                                            <td style="vertical-align:middle" width="auto">{{r.carrera.inicio | date:'dd/MMMM/yyyy'}}</td>
+                                            <td width="auto"><img style="max-width:100px; height:auto" src="{{r.profilepic}}" class="img-responsive" /></td>
+                                            <td style="vertical-align:middle" width="auto">
+                                                <a ng-click="inscribirEst(r.id)" data-dismiss="modal" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                                    Inscribir
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $('#DateBirth').datepicker({});
+    </script>
+
+</div>
