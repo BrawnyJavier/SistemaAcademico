@@ -72,6 +72,14 @@ namespace SistemaAcademico.Controllers.Api
             }
 
         }
+        [HttpGet]
+        public object getCurrent()
+        {
+            using (var context = new AcademicSystemContext())
+            {
+                return context.Periodos.Where(p => p.Status == SchemaTypes.PeriodStatus.En_Curso).First();
+            }
+        }
 
         [HttpGet]
         public object getPeriodDetails(int id)

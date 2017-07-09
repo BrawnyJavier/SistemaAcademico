@@ -9,6 +9,7 @@
 
         $http.get('/Api/Usuarios/getContext').then(function (data) {
             $scope.sysConf = data.data.identity;
+            sessionStorage.setItem("userid", data.data.identity.idusuario);
             $scope.studentConf = data.data.studentDash
             console.log("Context");
             console.log(data.data);

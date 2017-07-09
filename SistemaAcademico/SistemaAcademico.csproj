@@ -227,6 +227,7 @@
     <Compile Include="Controllers\Api\MajorsController.cs" />
     <Compile Include="Controllers\Api\MenuOptionsController.cs" />
     <Compile Include="Controllers\Api\PeriodosController.cs" />
+    <Compile Include="Controllers\Api\PreseleccionController.cs" />
     <Compile Include="Controllers\Api\RoomsController.cs" />
     <Compile Include="Controllers\Api\SeccionesDePeriodosController.cs" />
     <Compile Include="Controllers\Api\StudentsMajorsController.cs" />
