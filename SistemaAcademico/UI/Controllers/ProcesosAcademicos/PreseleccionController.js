@@ -22,6 +22,9 @@
                 $scope.studentPre = d.data;
                 console.log("EST")
                 console.log(d);
+            }, function (data) {
+                if (data.status == 403)
+                    swal('No disponible.', 'La Preselección no está disponible actualmente.', 'warning');
             });
         }
         $scope.inPreseleccion = function (obj) {

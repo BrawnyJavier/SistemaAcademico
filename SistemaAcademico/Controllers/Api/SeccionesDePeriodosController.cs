@@ -6,11 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using SistemaAcademico.DataModel;
 using SistemaAcademico.Classes;
+using System.Threading;
 
 namespace SistemaAcademico.Controllers.Api
 {
     public class SeccionesDePeriodosController : ApiController
     {
+      
         // GET: api/SeccionesDePeriodos/5
         public IEnumerable<object> Get(int id)
         {
@@ -55,6 +57,7 @@ namespace SistemaAcademico.Controllers.Api
                 context.SaveChanges();
             }
         }
+
 
         [HttpGet]
         public object getSection(int id)
@@ -154,7 +157,25 @@ namespace SistemaAcademico.Controllers.Api
                 return HttpStatusCode.OK;
             }
         }
+        [HttpGet] [SistemaAcademico.Services.SisAcademicoFilter]
+        public object getTeachersSections()
+        {
+            var currUser = int.Parse(Thread.CurrentPrincipal.Identity.Name);
 
+            using (var context = new AcademicSystemContext())
+            {
+              var  currentPeriod = context.Periodos.Where(p => p.Status == SchemaTypes.PeriodStatus.En_Curso).First().PeriodoID;
+
+                var teacherAsigs = context.PeriodAsignature.Where(p => p.Periodo.PeriodoID == currentPeriod && p.Profesor.UserId == currUser)
+                    .Select(d => new
+                    {
+                        seccion = d.seccion,
+                        asignatura = new {nombre = d.Asignatura.Name,id=d.Asignatura.AsignatureID}
+
+                    }).ToList();
+                return teacherAsigs;
+            }
+        }
         [HttpPost]
         public object FillDB()
         {

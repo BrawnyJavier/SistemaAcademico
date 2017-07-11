@@ -89,6 +89,22 @@
         {
             templateUrl: '/UI/Templates/ProcesosAcademicos/Revision.html',
         })
+       .when("/AddAula",
+        {
+            templateUrl: '/UI/Templates/Rooms/AddAula.html',
+        })
+       .when("/Publicar",
+        {
+            templateUrl: '/UI/Templates/AccionesProfesorales/Publicacion.html',
+        })
+       .when("/Revisiones",
+        {
+            templateUrl: '/UI/Templates/AccionesProfesorales/Revision.html',
+        })
+       .when("/Preferencia",
+        {
+            templateUrl: '/UI/Templates/AccionesProfesorales/Preferencias.html',
+        })
         .otherwise({ redirectTo: '/404' });
 
     });

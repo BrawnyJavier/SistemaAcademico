@@ -230,6 +230,7 @@
     <Compile Include="Controllers\Api\PreseleccionController.cs" />
     <Compile Include="Controllers\Api\RoomsController.cs" />
     <Compile Include="Controllers\Api\SeccionesDePeriodosController.cs" />
+    <Compile Include="Controllers\Api\SeleccionController.cs" />
     <Compile Include="Controllers\Api\StudentsMajorsController.cs" />
     <Compile Include="Controllers\Api\TeachersAsignaturesController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
@@ -956,6 +957,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="UI\AngularLocaleES.js" />
+    <Content Include="UI\Controllers\AccionesProfesorales\PublicacionController.js" />
     <Content Include="UI\Controllers\Areas\AreasController.js" />
     <Content Include="UI\Controllers\Asignatures\AsignatureDetailsController.js" />
     <Content Include="UI\Controllers\Aulas\AulasController.js" />
@@ -985,6 +987,9 @@
     <Content Include="UI\Pages\login_two_columns.html" />
     <Content Include="UI\LoginContext.js" />
     <Content Include="UI\SisAcademicoPAContext.js" />
+    <Content Include="UI\Templates\AccionesProfesorales\Preferencias.html" />
+    <Content Include="UI\Templates\AccionesProfesorales\Revision.html" />
+    <Content Include="UI\Templates\AccionesProfesorales\Publicacion.html" />
     <Content Include="UI\Templates\Areas\AddArea.html" />
     <Content Include="UI\Templates\Asignatures\AsignatureDetails.html" />
     <Content Include="UI\Templates\Majors\Pensums.html" />
@@ -1000,6 +1005,7 @@
     <Content Include="UI\Templates\ProcesosAcademicos\Retiro.html" />
     <Content Include="UI\Templates\ProcesosAcademicos\Seleccion.html" />
     <Content Include="UI\Templates\ProcesosAcademicos\Preseleccion.html" />
+    <Content Include="UI\Templates\Rooms\AddAula.html" />
     <Content Include="UI\Templates\Secciones\SectionDetail.html" />
     <Content Include="UI\Templates\Sys\AddMenuOption.html" />
     <Content Include="UI\Templates\Sys\Dashboards\TeachersDashboard.html" />

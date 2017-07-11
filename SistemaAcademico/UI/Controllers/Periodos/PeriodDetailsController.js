@@ -52,6 +52,52 @@
                 });
             })
         }
+        $scope.overridePreseleccion = function () {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Modificar la fecha de preseleccion afectará a todos los estudiantes inscritos en el periodo, teniendo como fecha limite de preseleccionar mañana a esta misma hora. Esta acción no puede ser revertida.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Continuar'
+            }).then(function () {
+                $http.put('/api/Periodos/overridePreseleccion').then(function () {
+                    swal('¡Listo!', 'Todos los cambios han sido guardados.', 'success'); $scope.fetch();
+                });
+            })
+        }
+        $scope.overrideSeleccion = function () {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Modificar la fecha de selección afectará a todos los estudiantes inscritos en el periodo, teniendo como fecha limite de seleccionar mañana a esta misma hora. Esta acción no puede ser revertida.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Continuar'
+            }).then(function () {
+                $http.put('/api/Periodos/overrideSeleccion').then(function () {
+                    swal('¡Listo!', 'Todos los cambios han sido guardados.', 'success'); $scope.fetch();
+                });
+            })
+        }
+        
+        $scope.overrideRetiro = function () {
+            swal({
+                title: '¿Estás seguro?',
+                text: "Modificar la fecha limite de retiro afectará a todos los estudiantes inscritos en el periodo, teniendo como fecha limite de retirar mañana a esta misma hora. Esta acción no puede ser revertida.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Continuar'
+            }).then(function () {
+                $http.put('/api/Periodos/overrideRetiro').then(function () {
+                    swal('¡Listo!', 'Todos los cambios han sido guardados.', 'success'); $scope.fetch();
+                });
+            })
+        }
         $scope.setAsignature = function (asignature) {
             console.log(asignature);
             $scope.currAsignature = asignature;

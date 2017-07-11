@@ -1,4 +1,4 @@
-﻿(function () {
+﻿/*(function () {
     // Getting the Context Module
     angular.module("SisAcademicoPA")
     // Addig the  controller function
@@ -28,6 +28,41 @@
         $scope.Actualizar = function () {
             $http.put('/Api/Areas/UpdateArea', $scope.newArea).then(function (data) {
                 $scope.fetchAreas();
+            });
+        }
+
+    }
+}());*/
+(function () {
+    // Getting the Context Module
+    angular.module("SisAcademicoPA")
+    // Addig the  controller function
+    // to the context module
+    .controller('RoomsController', RoomsController);
+    RoomsController.$inject = ['$scope', '$http'];
+    function RoomsController($scope, $http) {
+        $scope.newRooms = {};
+        $scope.editing = false;
+        $scope.fetchRooms = function () {
+            $http.get('/api/Rooms').then(function (data) {
+                $scope.Rooms = data.data;
+            });
+        }
+        $scope.fetchRooms();
+        $scope.Registrar = function () {
+            $http.post('/api/Rooms', $scope.newRooms)
+             .then(function (data, status, headers, config) {
+                 swal('‥isto!', 'Todos los cambios han sido guardados.', 'success');
+                 $scope.fetchRooms();
+             });
+        }
+        $scope.set = function (Rooms) {
+            $scope.editing = true;
+            for (var key in Rooms) $scope.newRooms[key] = Rooms[key];
+        }
+        $scope.Actualizar = function () {
+            $http.put('/Api/Rooms', $scope.newRooms).then(function (data) {
+                $scope.fetchRooms();
             });
         }
 

@@ -238,6 +238,10 @@
     <Compile Include="Migrations\201707082204219_Fixin titles.Designer.cs">
       <DependentUpon>201707082204219_Fixin titles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707111738269_Adding menu options for teachers.cs" />
+    <Compile Include="Migrations\201707111738269_Adding menu options for teachers.Designer.cs">
+      <DependentUpon>201707111738269_Adding menu options for teachers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -394,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707082204219_Fixin titles.resx">
       <DependentUpon>201707082204219_Fixin titles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707111738269_Adding menu options for teachers.resx">
+      <DependentUpon>201707111738269_Adding menu options for teachers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

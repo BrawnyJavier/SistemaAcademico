@@ -68,12 +68,51 @@ namespace SistemaAcademico.Controllers.Api
                        .Where(p => p.PeriodoID == id).FirstOrDefault()
                        .Status = SchemaTypes.PeriodStatus.Completado;
                 context.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK);
-            }
 
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+        [HttpPut]
+        public object overridePreseleccion()
+        {
+            using (var context = new AcademicSystemContext())
+            {
+                var currP = context.Periodos.Where(p => p.Status == SchemaTypes.PeriodStatus.En_Curso).First();
+                var now = DateTime.Now;
+                currP.fechaInicioPreselecion = now.AddDays(-1);
+                currP.fechafinPreseleccion = now.AddDays(1);
+                context.SaveChanges();
+            }
+            return HttpStatusCode.OK;
+        }
+
+        [HttpPut]
+        public object overrideSeleccion()
+        {
+            using (var context = new AcademicSystemContext())
+            {
+                var currP = context.Periodos.Where(p => p.Status == SchemaTypes.PeriodStatus.En_Curso).First();
+                var now = DateTime.Now;
+                currP.fechainicioSeleccion = now.AddDays(-1);
+                currP.fechafinSeleccion = now.AddDays(1);
+                context.SaveChanges();
+            }
+            return HttpStatusCode.OK;
+        }
+        [HttpPut]
+        public object overrideRetiro()
+        {
+            using (var context = new AcademicSystemContext())
+            {
+                var currP = context.Periodos.Where(p => p.Status == SchemaTypes.PeriodStatus.En_Curso).First();
+                var now = DateTime.Now;
+                currP.fechaLimiteRetiro = now.AddDays(-1);
+                context.SaveChanges();
+            }
+            return HttpStatusCode.OK;
         }
         [HttpGet]
-        public object getCurrent()
+        public Periodo getCurrent()
         {
             using (var context = new AcademicSystemContext())
             {
@@ -91,6 +130,8 @@ namespace SistemaAcademico.Controllers.Api
                                     {
                                         d.fechaInicio,
                                         d.fechaFin,
+                                        d.Status,
+                                        id = d.PeriodoID,
                                         asignaturasRegistradas = d.periodAsignatures
                                                                    .Select(pa => new
                                                                    {
