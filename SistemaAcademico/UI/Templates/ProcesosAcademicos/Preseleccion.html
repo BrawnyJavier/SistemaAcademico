@@ -30,7 +30,7 @@
                     <h1 class="m-t-none m-b">Busqueda de asignaturas</h1>
                     <hr />
                     <div class="col-lg-12">
-                        <div class="input-group m-b"><span class="input-group-addon"><i class="fa fa-search"></i></span> <input type="text" ng-change="fetchAsignaturas()" ng-model="query" placeholder="Ingresar Nombre o Código de la asignatura..." class="form-control"></div>
+                        <div class="input-group m-b"><span class="input-group-addon"><i class="fa fa-search"></i></span> <input type="text" ng-change="getOferta()" ng-model="query" placeholder="Ingresar Nombre o Código de la asignatura..." class="form-control"></div>
                     </div>
                     <table class="table">
                         <thead>
@@ -56,7 +56,10 @@
 
                                 </td>
                                 <td style="vertical-align:middle" width="auto">
-                                    <a ng-click="add(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary pull-right btn-rounded ng-scope">
+                                    <a ng-if="!inPreseleccion(r)" ng-click="add(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary pull-right btn-rounded ng-scope">
+                                        Añadir a Preseleccion
+                                    </a>
+                                    <a disabled ng-if="inPreseleccion(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary pull-right btn-rounded ng-scope">
                                         Añadir a Preseleccion
                                     </a>
                                 </td>

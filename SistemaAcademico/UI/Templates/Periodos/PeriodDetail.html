@@ -6,8 +6,11 @@
             Periodo
         </div>
         <div class="panel-body">
-            <h1>Periodo {{currperiod.fechaInicio | date:'MMMM'}} - {{currperiod.fechaFin | date:'MMMM'}} del {{currperiod.fechaFin | date:'yyyy'}} </h1>
+            <h1 style="font-weight:400; text-align:center">Periodo {{currperiod.fechaInicio | date:'MMMM'}} - {{currperiod.fechaFin | date:'MMMM'}} del {{currperiod.fechaFin | date:'yyyy'}} </h1>
             <button type="button" ng-click="concluir()" class="btn btn-danger pull-right">Concluir trimestre</button>
+            <button type="button" ng-click="concluir()" class="btn btn-warning pull-right">Activar Selecci&oacute;n</button>
+            <button type="button" ng-click="concluir()" class="btn btn-info pull-right">Activar Preselecci&oacute;n</button>
+            <button type="button" ng-click="concluir()" class="btn btn-primary pull-right">Activar Retiro</button>
         </div>
     </div>
     <div class="ibox float-e-margins">

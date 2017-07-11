@@ -17,7 +17,7 @@ namespace SistemaAcademico.Controllers.Api
             public string Name { get; set; }
             public string Codigo { get; set; }
         }
-        public object GetOferta(int id)
+        public object GetOferta(int id, string query)
         {
             using (var context = new AcademicSystemContext())
             {
@@ -27,9 +27,12 @@ namespace SistemaAcademico.Controllers.Api
                     + "JOIN [dbo].[Asignaturas] "
                     + "ON [Asignatura_AsignatureID] = [AsignatureID] "
                     + "WHERE [Periodo_PeriodoID] = " + id.ToString()
+                    + "AND [Name] LIKE '%"+query+"%'"
                     + " GROUP BY [Asignatura_AsignatureID],[Name] ,[Codigo]"
                                                      );
-                var result = querySet.ToList();
+                var result = querySet
+                                    .Take(20)
+                                    .ToList();
                 return result;
             }
         }
