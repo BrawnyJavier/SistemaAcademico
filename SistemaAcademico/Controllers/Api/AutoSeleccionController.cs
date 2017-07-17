@@ -18,6 +18,7 @@ namespace SistemaAcademico.Controllers.Api
             public int Qntity { get; set; }
             public FixedValues.Tanda TandaDeseada { get; set; }
             public int HorasSemanales { get; set; }
+            public int Credits { get; set; }
         }
         public class posibleTeacher
         {
@@ -30,14 +31,14 @@ namespace SistemaAcademico.Controllers.Api
             {
                 // Traera las asignaturas preseleccionadas, y sus respectivas tandas, mas la cantidad de estudiantes q la preseleccionaron
                 string Query = (
-                      "SELECT A.AsignatureID,A.[HorasSemanales], count(*) as Qntity, P.TandaDeseada "
+                      "SELECT A.AsignatureID,A.[HorasSemanales],A.[Credits], count(*) as Qntity, P.TandaDeseada "
                     + "FROM [dbo].[Preseleccions] P "
                     + "INNER JOIN [dbo].[PeriodAsignatures] PA "
                     + "ON p.Asignatura_PeriodAsignatureID = PA.PeriodAsignatureID "
                     + "INNER JOIN [dbo].[Asignaturas] A "
                     + "ON A.AsignatureID = PA.Asignatura_AsignatureID "
                     + "WHERE PA.Periodo_PeriodoID = (SELECT PeriodoID FROM Periodoes WHERE STATUS = 1) "
-                    + "GROUP BY A.AsignatureID, p.TandaDeseada,A.[HorasSemanales]; "
+                    + "GROUP BY A.AsignatureID, A.[Credits],p.TandaDeseada,A.[HorasSemanales]; "
                     );
                 IEnumerable<Preselecciones> PreseleccionesDelTrimestreActual = context.Database.SqlQuery<Preselecciones>(Query).ToList<Preselecciones>();
 
@@ -73,9 +74,9 @@ namespace SistemaAcademico.Controllers.Api
 
                         List<Horario> horariosNuevaSeccion = new List<Horario>();
 
-                        int horas = preseleccion.HorasSemanales;
+                        int horas = (preseleccion.HorasSemanales == 0) ? preseleccion.Credits  : preseleccion.HorasSemanales;
                         int maxHoursPerDay = 2;
-                        int remainingHours = preseleccion.HorasSemanales;
+                        int remainingHours = horas;
 
                         // Buscamos los limites de la tanda
                         DateTime horaInicio = (preseleccion.TandaDeseada == FixedValues.Tanda.Matutina) ? new DateTime(2017, 1, 1, 7, 0, 0)
