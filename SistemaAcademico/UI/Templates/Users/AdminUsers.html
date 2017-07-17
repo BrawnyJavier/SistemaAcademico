@@ -1,0 +1,73 @@
+﻿<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+<div class="row" ng-controller="AdminUsersController">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Usuarios Registrados</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <h1 class="m-t-none m-b">Administraci&oacute;n  de Usuarios</h1>
+                    <hr />
+                    <div class="col-lg-12">
+                        <input ng-change="fetch()" ng-model="query" type="text" placeholder="Ingresar Nombre o ID..." class="form-control">
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Tipo</th>
+                                <th>Carrera actual</th>
+                                <th>Fecha de Ingreso</th>
+                                <th>Imagen</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in queryResults">
+                                <td style="vertical-align:middle" width="auto">{{r.id}}</td>
+                                <td style="vertical-align:middle" width="auto">{{r.nombre}}</td>
+                                <td style="vertical-align:middle" width="auto">{{r.apellido}}</td>
+                                <td style="vertical-align:middle" width="auto">{{r.tipo}}</td>
+                                <td style="vertical-align:middle" width="auto">{{r.carrera.titulo}}</td>
+                                <td style="vertical-align:middle" width="auto">{{r.carrera.inicio | date:'dd/MMMM/yyyy'}}</td>
+                                <td width="auto"><img style="max-width:100px; height:auto" src="{{r.profilepic}}" class="img-responsive" /></td>
+                                <td style="vertical-align:middle" width="auto">
+                                    <a href="#/UsersDetails/{{r.id}}" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                        Ver
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#DateBirth').datepicker({});
+</script>

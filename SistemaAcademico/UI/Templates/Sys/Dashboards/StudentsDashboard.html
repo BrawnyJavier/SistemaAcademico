@@ -1,0 +1,123 @@
+﻿<script src="../../../../Content/js/plugins/chartJs/Chart.min.js"></script>
+<div class="col-lg-12" ng-controller="EstDashController">
+    <div class="row  border-bottom white-bg dashboard-header">
+        <div class="col-sm-12">
+            <h3>Bienvenido {{sysConf.nombre}}</h3>
+        </div>
+    </div>
+    <div class="row" style="padding:0">
+        <div class="col-lg-12" style="padding:0">
+            <div class="col-lg-9" style="padding:0">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Tablero de Indicadores</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12" style="padding:0">
+                                <div class="col-lg-5">
+                                    <h2>Datos generales</h2>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><text style="font-weight:bolder">ID</text></td>
+                                                <td>{{sysConf.idusuario}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><text style="font-weight:bolder">Índice</text></td>
+                                                <td>{{studentConf.programa.gpa}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><text style="font-weight:bolder">Programa</text></td>
+                                                <td>{{studentConf.programaMajor.majorTitle}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><text style="font-weight:bolder">Ingreso</text></td>
+                                                <td>{{studentConf.programa.initDate | date: 'MMMM yyyy'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><text style="font-weight:bolder">Períodos cursados</text></td>
+                                                <td>{{studentConf.periodosCursados}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><text style="font-weight:bolder">Última Condición</text></td>
+                                                <td>{{studentConf.ultimaCondicion.fechaInicio | date: 'MMMM yyyy'}} - {{studentConf.ultimaCondicion.fechaFin | date: 'MMMM yyyy'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-7">
+                                    <h2 style="font-weight:600">Progreso</h2>
+                                    <hr />
+                                    <div class="col-lg-6">
+                                        <label>Trimestres Cursados</label>
+                                        <canvas id="TrimestresCursadosChart" height="200"></canvas>
+                                        <hr />
+                                        <label>Asignaturas Aprobadas</label>
+                                        <canvas id="AsignaturasAprobadasChart" height="200"></canvas>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label> Índice</label>
+                                        <canvas id="IndiceChart" height="200"></canvas>
+
+                                        <hr />
+                                        <label> Créditos Aprobados</label>
+                                        <canvas id="CreditosAprobadosChart" height="200"></canvas>
+                                    </div>
+
+                                    <script>
+
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3" style="padding:0">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Estudiante</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href="#">Config option 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <img class="img-responsive center-block" style="max-width:80%; min-width:80%; height:auto" src="{{sysConf.profilePicturePath}}" />
+                                <div class="row text-center">
+                                    <div class="col-lg-12">
+                                        <h3 style="text-align:center;padding-top:20px">{{sysConf.nombre}} &nbsp;{{sysConf.apellido}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

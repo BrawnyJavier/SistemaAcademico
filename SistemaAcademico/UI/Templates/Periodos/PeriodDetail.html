@@ -1,0 +1,265 @@
+﻿<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+
+<div class="row" ng-controller="PeriodDetailsController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Periodo
+        </div>
+        <div class="panel-body">
+            <h1 style="font-weight:400; text-align:center">({{currperiod.id}}) - Periodo {{currperiod.fechaInicio | date:'MMMM'}} - {{currperiod.fechaFin | date:'MMMM'}} del {{currperiod.fechaFin | date:'yyyy'}} </h1>
+            <hr />
+            <div ng-if="currperiod.status==1">
+                <button type="button" ng-if="currperiod.status==1" ng-click="concluir()" class="btn btn-danger pull-right">Concluir trimestre</button>
+                <button type="button" ng-click="overrideSeleccion()" class="btn btn-warning pull-right">Activar Selecci&oacute;n</button>
+                <button type="button" ng-click="overridePreseleccion()" class="btn btn-info pull-right">Activar Preselecci&oacute;n</button>
+                <button type="button" ng-click="overrideRetiro()" class="btn btn-primary pull-right">Activar Retiro</button>
+                <button type="button" data-toggle="modal" data-target="#matchModal" ng-if="currperiod.status==1" class="btn btn-primary btn-rounded">Match de Preselecciones</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Periodo</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <h1 class="m-t-none m-b">Creaci&oacute;n de Secciones</h1>
+                    <hr />
+                    <div class="col-lg-12">
+                        <div class="input-group m-b"><span class="input-group-addon"><i class="fa fa-search"></i></span> <input type="text" ng-change="fetchAsignaturas()" ng-model="query" placeholder="Ingresar Nombre o Código de la asignatura..." class="form-control"></div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Creditos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in Asignaturas">
+                                <td>{{r.id}}</td>
+                                <td>{{r.codigo}}</td>
+                                <td>{{r.nombre}}</td>
+                                <td>{{r.tipo}}</td>
+                                <td>{{r.creditos}}</td>
+                                <td style="vertical-align:middle" width="auto">
+                                    <a ng-click="setAsignature(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                        Añadir a Oferta
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Secciones Inscritas</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <h1 class="m-t-none m-b">Secciones Inscritas para este per&iacute;odo</h1>
+                    <hr />
+                    <div class="col-lg-12">
+                        <input ng-change="fetcha()" ng-model="query3" type="text" placeholder="Ingresar Nombre o Código de la asignatura..." class="form-control">
+                        <hr />
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Codigo Asignatura</th>
+                                <th>Nombre Asignatura</th>
+                                <th>Seccion</th>
+                                <th>Profesor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in currperiod.asignaturasRegistradas">
+                                <td>{{r.codigoAsignatura}}</td>
+                                <td>{{r.nombreAsignatura}}</td>
+                                <td>{{r.seccion}}</td>
+                                <td>{{r.profesor}}</td>
+                                <!--{{r.periodoID}}-->
+                                <td style="vertical-align:middle" width="auto">
+                                    <a href="#/SectionDetails/{{r.seccionID}}" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                        Detalles
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modals -->
+    <!--Creacion de asignaturas-->
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Crear Secci&oacute;n de {{currAsignature.nombre}}</h4>
+                    <small class="font-bold">Añadir Secci&oacute;n al per&iacute;odo.</small>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12" style="padding:0">
+                            <label class="control-label">Seleccionar Maestro</label>
+                            <select id="teachersSelect" class="form-control m-b chosen-select" name="account"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" data-dismiss="modal" ng-click="inscribirAsig()" class="btn btn-success">Inscribir</button>
+                    <button type="button" ng-click="Inscribir()" data-dismiss="modal" class="btn btn-primary">Inscribir e Ir al detalle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Match-->
+    <div class="modal inmodal fade" id="matchModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><i class="fa fa-link"></i> Generar Secciones a partir de Preselecciones</h4>
+                    <small class="font-bold">Este procedimiento solo se puede ejecutar una vez por per&iacute;odo.</small>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12" style="padding:0">
+                            <h2>Procedimiento de Creaci&oacute;n de secciones automaticas</h2>
+                            <hr />
+                            <h3>
+                                &#8226; El procedimiento generar&aacute; las secciones a partir de las preselecciones de los estudiantes.
+                            </h3>
+                            <h3>  &#8226; Se intentara asignar el profesor que cumpla con la tanda elegida por los estudiantes y este asignado como docente de la materia.</h3>
+                            <h3>
+                                &#8226; Si se logra asignar exitosamente los horarios, aulas y docente para la seccion, se procedera a inscribir los estudiantes que preseleccionaron
+                                la asignatura, de lo contrario se generara la seccion sin profesor asignado y sin estudiantes inscritos. Esta seccion puede ser eliminada/modificada
+                                posteriormente por el administrador del sistema.
+                            </h3>
+                            <hr />
+                            <div class="col-lg-5 col-lg-offset-4">
+                                <div data-dismiss="modal" style="cursor:pointer" ng-click="excecuteMatch()" class="widget style1 navy-bg">
+                                    <div class="row vertical-align">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-play-circle fa-3x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <h2 class="font-bold">Generar</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal fade" id="matchResultModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:70%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><i class="fa fa-link"></i> Secciones Generadas</h4>
+                    <small class="font-bold">Este procedimiento solo se puede ejecutar una vez por per&iacute;odo.</small>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12" style="padding:0">
+                            <h2>Estas son las secciones que fueron generadas por el sistema apartir de las preselecciones.</h2>
+                            <hr />
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Secci&oacute;n</th>
+                                        <th>Asignatura</th>
+                                        <th>Maestro</th>
+                                        <th>Tanda</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in matchResults">
+                                        <td>{{r.seccion}}</td>
+                                        <td>{{r.asignatura}}</td>
+                                        <td>{{r.teacher}}</td>
+                                        <td>{{r.tanda}}</td>
+                                        <td style="vertical-align:middle" width="auto">
+                                            <a ng-click="gotoSectionDetails(r.periodAsignatureID)"   style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                                Detalle
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#DateBirth').datepicker({});
+</script>

@@ -1,0 +1,134 @@
+﻿<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+<div class="row" ng-controller="PreseleccionController">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Preseleccion </h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <h1 class="m-t-none m-b">Busqueda de asignaturas</h1>
+                    <hr />
+                    <div class="col-lg-12">
+                        <div class="input-group m-b"><span class="input-group-addon"><i class="fa fa-search"></i></span> <input type="text" ng-change="getOferta()" ng-model="query" placeholder="Ingresar Nombre o Código de la asignatura..." class="form-control"></div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Tanda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in Preseleccion">
+                                <td>{{r.id}}</td>
+                                <td>{{r.codigo}}</td>
+                                <td>{{r.name}}</td>
+                                <td>
+
+                                    <select id="{{r.id}}TandaSelect" class="form-control m-b" name="account">
+                                        <option value="0" selected> Matutina</option>
+                                        <option value="1"> Vespertina</option>
+                                        <option value="2"> Nocturna</option>
+                                    </select>
+
+                                </td>
+                                <td style="vertical-align:middle" width="auto">
+                                    <a ng-if="!inPreseleccion(r)" ng-click="add(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary pull-right btn-rounded ng-scope">
+                                        Añadir a Preseleccion
+                                    </a>
+                                    <a disabled ng-if="inPreseleccion(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary pull-right btn-rounded ng-scope">
+                                      Ya esta preseleccionado
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de Preseleccion</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <h1 class="m-t-none m-b">Mi preseleccion</h1>
+                    <hr />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Tanda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in studentPre">
+                                <td>{{r.materiaId}}</td>
+                                <td>{{r.codigo}}</td>
+                                <td>{{r.materia}}</td>
+                                <td ng-if="r.tanda==0">Matutina</td>
+                                <td ng-if="r.tanda==1">Vespertina</td>
+                                <td ng-if="r.tanda==2">Nocturna</td>
+                                <td style="vertical-align:middle" width="auto">
+                                    <a ng-click="setAsignature(r)" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                        Editar
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#DateBirth').datepicker({});
+</script>

@@ -1,0 +1,113 @@
+﻿<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+<div class="row" ng-controller="AreasController">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>Administracion de áreas </h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-10 b-r">
+                    <h1 class="m-t-none m-b">Registrar Área</h1>
+                    <hr />
+                    <style>
+                        .noPadding {
+                            padding: 0;
+                        }
+                    </style>
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Titulo</label>
+                            <input ng-model="newArea.name" type="text" placeholder="Nombre" class="form-control">
+                        </div>
+                        <div class="col-lg-4 noPadding">
+                            <div class="form-group">
+                                <label>Codigo</label>
+                                <input ng-model="newArea.codigo" type="tel" placeholder="Télefono" class="form-control">
+                            </div>
+                        </div>
+                        <div>
+                            <button ng-if="!editing" ng-click="Registrar()" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Registrar</strong></button>
+                            <button ng-if="editing" ng-click="Actualizar()" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Actualizar</strong></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+            <h5>&Aacute;reas Registradas</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#">Config option 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>C&oacute;digo</th>
+                                <th>Nombre &Aacute;rea</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="a in Areas">
+                                <td style="vertical-align:middle" width="auto">{{a.areaID}}</td>
+                                <td style="vertical-align:middle" width="auto">{{a.codigo}}</td>
+                                <td style="vertical-align:middle" width="auto">{{a.name}}</td>
+                                <td style="vertical-align:middle" width="auto">
+                                    <a ng-click="set(a)" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block ng-scope">
+                                        Editar
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#DateBirth').datepicker({});
+</script>

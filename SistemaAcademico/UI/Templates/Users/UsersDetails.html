@@ -1,0 +1,167 @@
+﻿<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="../../../Content/js/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+<link href="../../../Content/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet" />
+<script src="../../../Content/js/plugins/chosen/chosen.jquery.js"></script>
+<div ng-controller="UsersDetailsController">
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+                <h5>Detalles del Usuario</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-8 b-r">
+                        <h1 class="m-t-none m-b">{{currser.name}}&nbsp;{{currser.name2}}&nbsp;{{currser.lastName}}</h1>
+                        <hr />
+                        <form role="form">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input ng-model="currser.name" type="text" placeholder="Nombre" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Segundo Nombre</label>
+                                <input ng-model="currser.name2" type="text" placeholder="Segundo Nombre" class="form-control">
+                            </div>
+                            <div class="form-group"><label>Apellido</label> <input ng-model="currser.lastName" type="text" placeholder="Apellido" class="form-control"></div>
+                            <div class="form-group"><label>N&uacute;mero de T&eacute;lefono</label> <input ng-model="currser.phoneNum" type="tel" placeholder="Télefono" class="form-control"></div>
+                            <div class="form-group"><label>Email</label> <input ng-model="currser.email" type="email" placeholder="Email" class="form-control"></div>
+                            <div class="form-group"><label>Contraseña</label> <input ng-model="currser.password" type="password" placeholder="Contraseña" class="form-control"></div>
+                            <div class="col-sm-4" style="padding:0">
+                                <label class="control-label">Tipo de Usuario</label>
+                                <select id="userTypeSelect" class="form-control m-b" name="account">
+                                    <option value="0">Estudiante</option>
+                                    <option value="1">Profesor</option>
+                                    <option value="2">Administrador</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="sandbox-container">
+                                <label class="font-noraml">Fecha de Nacimiento</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input ng-model="currser.birthDate" id="DateBirth" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div>
+                                <button ng-click="update()" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong><i class="fa fa-floppy-o"></i> Guardar</strong></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <img style="min-width:100%" class="img-responsive" src="{{currser.profilePicturePath}}" />
+                        <a ng-click="PicChange()" style="margin-top:10px" class="btn btn-primary btn-rounded btn-block"><i class="fa fa-info-circle"></i> Cambiar foto de perfil </a>
+                        <br />
+                        <div style="width:100%" class="fileinput fileinput-new" data-provides="fileinput">
+                            <span class="btn btn-default btn-file">
+                                <span class="fileinput-new">Select file</span>
+                                <span class="fileinput-exists">Change</span><input accept="image/*" type="file" file-Model="profilePic.data">
+                            </span>
+                            <span class="fileinput-filename"></span>
+                            <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="isStudent" class="ibox float-e-margins">
+            <div class="ibox-title" style="background-color:rgb(47, 64, 80);color:white">
+                <h5>Carreras</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div ng-if="!currser.isActive" class="col-lg-6 pull-right">
+                    <a ng-if="isStudent" data-toggle="modal" data-target="#myModal5" style="margin-top:10px" class="btn btn-success btn-rounded btn-block "> Inscribir en una carrera </a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Carrera</th>
+                                    <th>status</th>
+                                    <th>&Iacute;ndice</th>
+                                    <th>Fecha de Inicio</th>
+                                    <th>Fecha de Culminaci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="r in currser.carreras">
+                                    <td style="vertical-align:middle" width="auto">{{r.carrera}}</td>
+                                    <td style="vertical-align:middle" width="auto">{{r.status}}</td>
+                                    <td style="vertical-align:middle" width="auto">{{r.indice}}</td>
+                                    <td style="vertical-align:middle" width="auto">{{r.inicio  | date:'dd/MMMM/yyyy'}}</td>
+                                    <td style="vertical-align:middle" width="auto">{{r.fin | date:'dd/MMMM/yyyy'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modals -->
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Inscripci&oacute;n Estudiantil</h4>
+                    <small class="font-bold">Inscribir al estudiante {{currser.name}}&nbsp;{{currser.name2}}&nbsp;{{currser.lastName}} en una de las carreras registradas.</small>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12" style="padding:0">
+                            <label class="control-label">Carrera</label>
+                            <select id="majorsSelect" class="form-control m-b chosen-select" name="account"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" ng-click="Inscribir()" data-dismiss="modal" class="btn btn-primary">Inscribir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- moodal -->
+</div>
+<script src="../../../Content/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#DateBirth').datepicker({});
+</script>
